@@ -128,16 +128,130 @@ case
     end case;
     dbms_output.put_line('******************');
 end;
-a
+
+
+
+--WEDNESDAY
+set serveroutput on
+declare
+a varchar2(10):='&a';
+begin
+dbms_output.put_line('entered string is'||a);
+end;
+
+
+
+create or replace procedure GREET
+as
+begin 
+dbms_output.put_line("welcome to chennai");
+end greet;
+
+exec greet;
+
+create or replace procedure findmax
+(x IN number, y IN number, z OUT number) IS
+BEGIN
+    IF x>y THEN
+        z:=x;
+    ELSE
+        z:=y;
+    END IF;
+END findmax;
+
+DECLARE
+ a number:=0;
+ b number:=0;
+ c number:=0;
+BEGIN
+ a:=&a;
+ b:=&b;
+ findmax(a,b,c);--positional notation
+ if C=a then
+    dbms_output.put_line('A is maximum of ('||a||'):'||'Low value B'|| b);
+else
+    dbms_output.put_line('B is maximum of ('||b||'):'||'Low value A'|| a);
+end if;
+END;
+
+create or replace procedure CubeNum(x IN OUT number) IS
+BEGIN
+x:= x*x*x;
+END;
+
+Declare
+a number:=&aval;
+aval Number;
+BEGIN
+ aval := a;
+ CubeNum(a);
+ dbms_output.put_line('cube of '|| a || 'is' || a);
+END;
+
+create or replace function get_deptname(p_deptid number) return varchar2
+as
+l_deptname varchar2(40);
+begin
+    select deptname into l_deptname from dept where deptid=p_deptid;
+    return l_deptname;
+end;
+
+select * from dept;
+
+BEGIN
+dbms_output.put_line(get_deptname(1002));
+END;
+
+exec dbms_output.put_line(get_deptname(1001));
+select empid ,empname,get_deptname(deptid),salary from emp;
 
 
 
 
 
+create or replace function factorial(a IN number)
+RETURN number
+IS
+    fact number;
+    BEGIN
+        IF a=0 then
+            fact :=1;
+        ELSE
+            fact := a * factorial(a-1);
+        END IF;
+    RETURN fact;
+end;
 
 
+DECLARE
+ num number;
+ fact number;
+BEGIN
+ num :=&numval;
+ fact := factorial(num);
+ dbms_output.put_line('factorial'||num||'is'||fact);
+END;
 
 
+create or replace function Nxtday(date_in DATE)
+RETURN DATE IS
+BEGIN 
+RETURN TRUNC(date_in+1);
+END NxtDay;
 
+Declare
+ndate Date:=sysdate;
+nval Date;
+BEGIN
+    nval := NxtDay(ndate);
+    dbms_output.put_line('ToDay ('||ndate ||'):Next Day ' || nval);
+END;
 
-
+--oracle in built functions
+declare
+greetings varchar2(30):='...Hello world.....';
+Begin
+dbms_output.put_line(RTRIM(greetings,'.'));
+dbms_output.put_line(LTRIM(greetings,'.'));
+dbms_output.put_line(TRIM(greetings,'.'));
+END;
