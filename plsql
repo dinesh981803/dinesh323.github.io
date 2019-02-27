@@ -233,6 +233,9 @@ BEGIN
 END;
 
 
+
+
+----
 create or replace function Nxtday(date_in DATE)
 RETURN DATE IS
 BEGIN 
@@ -255,3 +258,20 @@ dbms_output.put_line(RTRIM(greetings,'.'));
 dbms_output.put_line(LTRIM(greetings,'.'));
 dbms_output.put_line(TRIM(greetings,'.'));
 END;
+----
+
+declare 
+    greetings varchar2(30):='Hello all';
+begin
+    dbms_output.put_line('RPAD' || RPAD(greetings,20,'*'));
+    dbms_output.put_line('LPAD' || LPAD(greetings,20,'@'));
+    dbms_output.put_line('upper' || upper(greetings));
+    dbms_output.put_line('Lower' || lower(greetings));
+    dbms_output.put_line('Initcap' || initcap(greetings));
+    dbms_output.put_line(instr('Jamjam','ja'));
+    dbms_output.put_line('Concat in oracle' || upper(greetings)||'initcap(welcome in-CHN19DW006'||'DW Batch');
+    dbms_output.put_line('left '|| substr(greetings,1,5));
+    dbms_output.put_line('length '|| length(greetings));
+    END;
+
+
